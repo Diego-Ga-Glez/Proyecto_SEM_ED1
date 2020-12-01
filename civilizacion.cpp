@@ -4,16 +4,6 @@ using namespace std;
 
 Civilizacion::Civilizacion(){};
 
-Civilizacion::Civilizacion(const Civilizacion& c):nombre(c.nombre),x(c.x),y(c.y), puntuacion(c.puntuacion){}
-
-Civilizacion& Civilizacion::operator=(const Civilizacion &c){
-    nombre = c.nombre;
-    x = c.x;
-    y = c.y;
-    puntuacion = c.puntuacion;
-    return *this;
-}
-
 void Civilizacion::setNombre(const string& _nombre){
     nombre = _nombre;
 }
@@ -57,6 +47,66 @@ bool Civilizacion::operator== (const Civilizacion& c){
     return nombre == c.nombre;
 }
 
+void Civilizacion::agregarFinal(const Aldeano& a){
+    aldeanos.push_back(a);
+}
+
+void Civilizacion::agregarInicio(const Aldeano &a){
+    aldeanos.push_front(a);
+}
+
+void Civilizacion::imprimirAldeanos(){
+    cout << left;
+    cout << setw(15) << "Nombre";
+    cout << setw(10) << "Edad";
+    cout << setw(15) << "Genero";
+    cout << setw(10) << "Salud";
+    cout<<endl;
+
+    for(auto it = aldeanos.begin(); it!= aldeanos.end(); it++){
+            cout<< *it;
+    }
+}
+
+void Civilizacion::eliminarNombre(const string& nombre){
+    for(auto it = aldeanos.begin(); it!= aldeanos.end(); it++){
+        Aldeano &a = *it;
+        if(nombre == a.getNombre()){
+            aldeanos.erase(it);
+            break;
+        }
+    }
+}
+
+void Civilizacion::eliminarSalud(const int& salud){
+    aldeanos.remove_if([salud](const Aldeano& a){ return a.getSalud()< salud;});
+}
+
+void Civilizacion::eliminarEdad(){
+    aldeanos.remove_if([](const Aldeano& a){ return a.getEdad()>= 60;});
+}
+
+void Civilizacion::ordenarNombre(){
+    aldeanos.sort([](const Aldeano& a1, const Aldeano& a2){return a1.getNombre() <a2.getNombre(); });
+}
+
+void Civilizacion::ordenarEdad(){
+    aldeanos.sort([](const Aldeano& a1, const Aldeano& a2){return a1.getEdad() > a2.getEdad(); });
+}
+
+void Civilizacion::ordenarSalud(){
+    aldeanos.sort([](const Aldeano& a1, const Aldeano& a2){return a1.getSalud() > a2.getSalud(); });
+}
+
+Aldeano* Civilizacion::buscar(const Aldeano& a){
+    auto it = find(aldeanos.begin(), aldeanos.end(), a);
+
+    if(it == aldeanos.end())
+        return nullptr;
+    else
+        return &(*it);
+}
+
 ostream& operator << (ostream &out, const Civilizacion& c){
     out << left;
     out << setw(15) << c.nombre;
@@ -82,4 +132,3 @@ istream& operator >> (istream &in, Civilizacion& c){
 
     return in;
 }
-

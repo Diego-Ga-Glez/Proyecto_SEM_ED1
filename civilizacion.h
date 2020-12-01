@@ -4,6 +4,9 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <list>
+#include <algorithm>
+#include "aldeano.h"
 
 class Civilizacion{
     private:
@@ -11,11 +14,10 @@ class Civilizacion{
         int x;
         int y;
         int puntuacion;
+        std::list<Aldeano> aldeanos;
 
     public:
         Civilizacion();
-        Civilizacion(const Civilizacion&);
-        Civilizacion& operator = (const Civilizacion&);
 
         void setNombre(const std::string&);
         void setX(const int&);
@@ -29,6 +31,17 @@ class Civilizacion{
 
         std::string toString();
         bool operator == (const Civilizacion&);
+
+        void agregarFinal(const Aldeano&);
+        void agregarInicio(const Aldeano&);
+        void imprimirAldeanos();
+        void eliminarNombre(const std::string&);
+        void eliminarSalud(const int&);
+        void eliminarEdad();
+        void ordenarNombre();
+        void ordenarEdad();
+        void ordenarSalud();
+        Aldeano* buscar(const Aldeano&);
 
         friend std::ostream& operator <<(std::ostream&, const Civilizacion&);
         friend std::istream& operator >>(std::istream&, Civilizacion&);
