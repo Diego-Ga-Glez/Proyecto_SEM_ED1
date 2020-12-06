@@ -1,12 +1,12 @@
 #include <iostream>
 #include "videojuego.h"
 
-using namespace std;
-
 void menuOrdenar(Videojuego&);
 void menuModificar(Civilizacion*);
 void menuAldeano(Civilizacion*);
 void menuModificarAldeano(Aldeano*);
+
+using namespace std;
 
 int main()
 {
@@ -33,6 +33,7 @@ int main()
         cout<<"13.- Recuperar"<<endl;
         cout<<"0.- Salir"<<endl;
         cout<<"Elije una opcion: ";
+        cin>>op; cin.ignore();
 
         switch(op){
             case 1:
