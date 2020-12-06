@@ -95,3 +95,52 @@ void Videojuego::toString(){
         cout << civilizaciones[i];
     }
 }
+
+void Videojuego::respaldar_civilizaciones(){
+    ofstream archivo("civilizaciones.txt", ios::out);
+
+     for (int i = 0; i < civilizaciones.size(); ++i) {
+        Civilizacion &c = civilizaciones[i];
+        archivo << c.getNombre() << endl;
+        archivo << c.getX() << endl;
+        archivo << c.getY() << endl;
+        archivo << c.getPuntuacion() << endl;
+        c.respaldar_aldeanos();
+    }
+    archivo.close();
+}
+
+void Videojuego::recuperar_civilizaciones() {
+
+    ifstream archivo("civilizaciones.txt");
+    if (archivo.is_open()) {
+        string temp;
+        int aux;
+        Civilizacion c;
+
+        while(true) {
+            getline(archivo, temp);
+            if(archivo.eof()) {
+                break;
+            }
+            c.setNombre(temp);
+
+            getline(archivo, temp);
+            aux = stoi(temp);
+            c.setX(aux);
+
+            getline(archivo, temp);
+            aux = stoi(temp);
+            c.setY(aux);
+
+            getline(archivo, temp);
+            aux = stoi(temp);
+            c.setPuntuacion(aux);
+
+            c.recuperar_aldeanos();
+            agregar(c); 
+            c.anular_aldeanos();   
+        }
+    }
+    archivo.close();
+}

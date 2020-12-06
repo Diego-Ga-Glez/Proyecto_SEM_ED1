@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <fstream>
 #include "civilizacion.h"
 
 class Videojuego{
@@ -32,6 +33,10 @@ class Videojuego{
         void eliminar(const std::string&);
         Civilizacion* buscar(const Civilizacion&);
         void toString();
+
+        void respaldar_civilizaciones();
+        void recuperar_civilizaciones();
+        
 
 
 

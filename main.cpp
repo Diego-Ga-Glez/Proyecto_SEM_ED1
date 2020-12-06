@@ -29,15 +29,14 @@ int main()
         cout<<"9.- Buscar "<<endl;
         cout<<"10.- Modificar "<<endl;
         cout<<"11.- Total"<<endl;
+        cout<<"12.- Respaldar"<<endl;
+        cout<<"13.- Recuperar"<<endl;
         cout<<"0.- Salir"<<endl;
         cout<<"Elije una opcion: ";
-        cin>>op;
-        cin.ignore();
-        cout<<endl;
 
         switch(op){
             case 1:
-                cout<<"Ingrese el nombre del videojuego: ";
+                cout<<"Ingrese su nombre de usuario: ";
                 getline(cin,cadena);
                 newGame.setNombre(cadena);
                 break;
@@ -112,6 +111,12 @@ int main()
                 break;
             case 11:
                 newGame.toString();
+                break;
+            case 12:
+                newGame.respaldar_civilizaciones();
+                break;
+            case 13:
+                newGame.recuperar_civilizaciones();
                 break;
             case 0:
                 cout<<endl<<"Hasta luego :3"<<endl;
@@ -206,10 +211,14 @@ void menuAldeano(Civilizacion* ptr){
                     case 1:
                         cin>>aux;
                         ptr->agregarFinal(aux);
+                        temp = ptr->getPuntuacion() + 100;
+                        ptr->setPuntuacion(temp);
                         break;
                     case 2:
                         cin>>aux;
                         ptr->agregarInicio(aux);
+                        temp = ptr->getPuntuacion() + 100;
+                        ptr->setPuntuacion(temp);
                         break;
                 }
                 break;

@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <list>
 #include <algorithm>
+#include <fstream>
 #include "aldeano.h"
 
 class Civilizacion{
@@ -42,6 +43,11 @@ class Civilizacion{
         void ordenarEdad();
         void ordenarSalud();
         Aldeano* buscar(const Aldeano&);
+
+        void respaldar_aldeanos();
+        void recuperar_aldeanos();
+         void anular_aldeanos();
+
 
         friend std::ostream& operator <<(std::ostream&, const Civilizacion&);
         friend std::istream& operator >>(std::istream&, Civilizacion&);

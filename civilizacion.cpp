@@ -132,3 +132,51 @@ istream& operator >> (istream &in, Civilizacion& c){
 
     return in;
 }
+
+void Civilizacion::respaldar_aldeanos(){
+    ofstream aldeanos_archivo(getNombre() + ".txt", ios::out);
+    
+    for (auto it = aldeanos.begin(); it != aldeanos.end(); ++it) {
+        Aldeano &aldeano = *it; 
+        aldeanos_archivo << aldeano.getNombre() << endl;
+        aldeanos_archivo << aldeano.getEdad()   << endl;
+        aldeanos_archivo << aldeano.getGenero() << endl;
+        aldeanos_archivo << aldeano.getSalud()  << endl;
+    }
+    aldeanos_archivo.close();
+}
+
+void Civilizacion::recuperar_aldeanos() {
+    ifstream archivo(getNombre() + ".txt");
+    if (archivo.is_open()) {
+        string temp;
+        int aux;
+        Aldeano a;
+
+        while(true) {
+            getline(archivo, temp);
+            if(archivo.eof()) {
+                break;
+            }
+            a.setNombre(temp);
+
+            getline(archivo, temp);
+            aux = stoi(temp);
+            a.setEdad(aux);
+
+            getline(archivo, temp);
+            a.setGenero(temp);
+
+            getline(archivo, temp);
+            aux = stoi(temp);
+            a.setSalud(aux);
+
+            agregarFinal(a);
+        }
+    }
+    archivo.close();
+}
+
+void Civilizacion::anular_aldeanos(){
+    aldeanos.clear();
+}
